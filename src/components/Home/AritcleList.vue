@@ -15,17 +15,12 @@
       </div>
       <div class="right-side">
         <h2>常看文章</h2>
-        <router-link to="/"> TypeScript入门指南：从JS到TS的转变</router-link>
-        <br />
-        <router-link to="/"> TypeScript入门指南：从JS到TS的转变</router-link>
-        <br />
-        <router-link to="/"> TypeScript入门指南：从JS到TS的转变</router-link>
-        <br />
-        <router-link to="/login">
-          TypeScript入门指南：从JS到TS的转变</router-link
-        >
-        <br />
-        <router-link to="/"> TypeScript入门指南：从JS到TS的转变</router-link>
+        <AlwaysArt
+          v-for="item in alwArticle"
+          :key="item.id"
+          :title="item.title"
+          :vtimes="item.vtimes"
+        ></AlwaysArt>
       </div>
     </div>
     <div v-if="isShow" class="loading">
@@ -36,11 +31,13 @@
 </template>
 
 <script>
-import Article from '@/components/Article/Article.vue'
+import Article from '@/components/Home/Article.vue'
+import AlwaysArt from './Always.vue'
 import { getArt } from '@/api/Article/getArt'
 export default {
   components: {
-    Article
+    Article,
+    AlwaysArt
   },
   data () {
     return {
@@ -53,10 +50,23 @@ export default {
         // 开始位置
         star: 0,
         // 查询方式
-        tag: this.router_statu
+        tag: ''
+      },
+      alyParams: {
+        // 查询数量
+        limit: 10,
+        // 排序方式
+        sort: 'desc',
+        orderby: 'vtimes',
+        // 开始位置
+        star: 0,
+        // 查询方式
+        tag: ''
       },
       // 文章列表
       artlist: [],
+      // 常看文章
+      alwArticle: [],
       // 判断是否显示
       isShow: true,
       // 加载更多
@@ -67,9 +77,11 @@ export default {
     console.log('创建阶段')
     const { data: res } = await getArt(this.params)
     this.artlist = res.date
+    const { data: res1 } = await getArt(this.alyParams)
+    this.alwArticle = res1.date
   },
   mounted () {
-    window.addEventListener('scroll', this.debounce(this.load, 1000))
+    window.addEventListener('scroll', this.debounce(this.load, 500))
   },
   methods: {
     // 下拉加载更多
@@ -117,11 +129,14 @@ export default {
       // 当前路由状态
       const rs = to.path.split('/')[2] === 'rec' ? '' : to.path.split('/')[2]
       this.params.tag = rs
+      this.alyParams.tag = rs
       this.params.star = 0
       this.isShow = true
       this.loadMore = true
       const { data: res } = await getArt(this.params)
       this.artlist = res.date
+      const { data: res1 } = await getArt(this.alyParams)
+      this.alwArticle = res1.date
     }
   }
 }
@@ -134,31 +149,37 @@ li {
 a {
   color: #000;
 }
+.backTop {
+  position: fixed;
+  bottom: 0;
+  width: 100px;
+  height: 100px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
 // 文章部分
 .article-list {
   display: flex;
+  justify-content: space-between;
   flex: 1;
   width: 100%;
   // min-height: 1500px;
   margin-top: 15px;
   .left-side {
+    min-width: 900px;
     margin-right: 20px;
   }
   .right-side {
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
     width: 100%;
     text-align: center;
+    margin-top: 16px;
+    border-collapse: collapse;
     h2 {
+      margin-top: 10px;
+      color: #f56c6c;
       font-weight: 400;
-    }
-    a {
-      display: block;
-      height: 50px;
-      line-height: 50px;
-
-      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
-    }
-    a:hover {
-      color: red;
     }
   }
 }

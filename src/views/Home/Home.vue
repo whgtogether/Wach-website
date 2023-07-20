@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div>
+    <div @click="backTop" v-if="TopBarFixed" class="backTop">UP</div>
     <div class="nav" :class="navBarFixed == true ? 'navBarWrap' : ''">
       <el-row>
         <el-col :span="8">
@@ -27,16 +28,21 @@
         ></el-col>
         <el-col :span="8">
           <el-row>
-            <el-col :span="12"
+            <el-col :span="8"
               ><div class="info">
                 <span class="el-icon-message"></span
                 ><router-link to="/">留言</router-link>
               </div></el-col
             >
-            <el-col :span="12"
+            <el-col :span="8"
               ><div class="info">
                 <span class="el-icon-user"></span>
                 <router-link to="/">关于</router-link>
+              </div></el-col
+            ><el-col :span="8"
+              ><div class="info">
+                <span class="el-icon-circle-plus-outline"></span>
+                <router-link to="/">发布</router-link>
               </div></el-col
             >
           </el-row></el-col
@@ -48,25 +54,29 @@
       <div class="blog-nav">
         <ul @click="colorChange">
           <li>
-            <router-link to="/home/rec" class="selected">推荐</router-link>
+            <router-link id="rec" to="/home/rec" class="selected"
+              >推荐</router-link
+            >
           </li>
           <li>
-            <router-link to="/home/javascript">JavaScript</router-link>
+            <router-link id="javascript" to="/home/javascript"
+              >JavaScript</router-link
+            >
           </li>
           <li>
-            <router-link to="/home/html">HTML</router-link>
+            <router-link id="html" to="/home/html">HTML</router-link>
           </li>
           <li>
-            <router-link to="/home/css">CSS</router-link>
+            <router-link id="css" to="/home/css">CSS</router-link>
           </li>
           <li>
-            <router-link to="/home/vue">Vue</router-link>
+            <router-link id="vue" to="/home/vue">Vue</router-link>
           </li>
           <li>
-            <router-link to="/home/react">React</router-link>
+            <router-link id="react" to="/home/react">React</router-link>
           </li>
           <li>
-            <router-link to="/home/node">Node</router-link>
+            <router-link id="node" to="/home/node">Node</router-link>
           </li>
         </ul>
       </div>
@@ -82,10 +92,15 @@ export default {
   props: ['lang'],
   data () {
     return {
-      navBarFixed: false
+      navBarFixed: false,
+      TopBarFixed: false
     }
   },
-  async created () {},
+  created () {
+    if (this.$route.path !== '/home/rec') {
+      this.$router.push('/home/rec')
+    }
+  },
   mounted () {
     window.addEventListener('scroll', this.watchScroll)
   },
@@ -105,23 +120,41 @@ export default {
     watchScroll () {
       const scrollTop =
         document.documentElement.scrollTop || document.body.scrollTop
-      //  当滚动超过 90 时，实现吸顶效果
+      //  当滚动超过 100 时，实现吸顶效果
+      console.log(scrollTop)
       if (scrollTop > 100) {
         this.navBarFixed = true
       } else {
         this.navBarFixed = false
       }
+
+      // 当滚动超过200时，实现向上功能
+      if (scrollTop > 2000) {
+        this.TopBarFixed = true
+      } else {
+        this.TopBarFixed = false
+      }
     },
     // 返回到顶层
     backTop () {
-      scroll(0, 0)
-    }
-  },
-  watch: {
-    async $route (to) {
-      // 当前路由状态
-      const rs = to.path.split('/')[2]
-      console.log(rs)
+      const timer = setInterval(function () {
+        const target = 0
+        // 获取页面当前滚动的距离
+        let leader = document.documentElement.scrollTop
+        let step = (target - leader) / 10
+        // step = step > 0 ? Math.ceil(step) : ___(7)___(step);
+        step = step > 0 ? Math.ceil(step) : Math.floor(step)
+        leader = leader + step
+        // 滚动到leader位置
+        // window.___(8)____(0, leader);
+        window.scrollTo(0, leader)
+        // if (____(9)_____) {
+        if (leader === 0) {
+          // 清除计时器
+          // ____(10)_____;
+          clearInterval(timer)
+        }
+      }, 5)
     }
   }
 }
@@ -145,11 +178,26 @@ a {
 }
 
 // 吸附设置
-
 .navBarWrap {
   position: fixed;
   top: 0;
   z-index: 999;
+}
+
+.backTop {
+  position: fixed;
+  bottom: 80px;
+  right: 80px;
+  width: 120px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  color: #fff;
+  background-color: #a5d4f1;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+  transition: all 2s;
+  // border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 // 头部导航栏

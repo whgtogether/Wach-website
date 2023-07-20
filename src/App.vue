@@ -40,6 +40,7 @@ th,
 td,
 p,
 span,
+button,
 a {
   border: 0;
 }

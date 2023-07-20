@@ -6,7 +6,7 @@ import pathArr from '@/router/pathArr.js'
 import Login from '@/views/Login/Login'
 import Sign from '@/views/Login/Sign.vue'
 import Home from '@/views/Home/Home.vue'
-import AritcleList from '@/components/Article/AritcleList.vue'
+import AritcleList from '@/components/Home/AritcleList.vue'
 Vue.use(VueRouter)
 
 const routes = [
