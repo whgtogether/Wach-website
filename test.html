@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text">
+    <script>
+
+
+        function debounce(func, delay) {
+            var timer = null;
+            return function () {
+                var that = this;
+                var args = arguments
+                clearTimeout(timer)
+                timer = setTimeout(function () {
+                    func.call(that, args)
+                }, delay)
+            }
+        }
+        var inp = document.getElementsByTagName('input')[0]
+        function handler() {
+            console.log(this.value);
+        }
+        inp.addEventListener('input', debounce(handler, 1000))
+    </script>
+</body>
+
+</html>
