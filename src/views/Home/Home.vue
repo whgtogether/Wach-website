@@ -118,7 +118,11 @@ export default {
     }
   },
   watch: {
-
+    async $route (to) {
+      // 当前路由状态
+      const rs = to.path.split('/')[2]
+      console.log(rs)
+    }
   }
 }
 </script>
