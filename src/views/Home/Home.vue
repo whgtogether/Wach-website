@@ -6,7 +6,7 @@
       <el-row>
         <el-col :span="8">
           <el-row>
-            <el-col :span="12">
+            <el-col :span="8">
               <div class="info">
                 <div class="home" @click="backTop">
                   <span class="el-icon-house"></span>
@@ -14,7 +14,13 @@
                 </div>
               </div></el-col
             >
-            <el-col :span="12">
+            <el-col :span="8">
+              <div class="info">
+                <span class="el-icon-news"></span>
+                <router-link to="/">AI</router-link>
+              </div></el-col
+            >
+            <el-col :span="8">
               <div class="info">
                 <span class="el-icon-folder-remove"></span>
                 <router-link to="/">归档</router-link>
