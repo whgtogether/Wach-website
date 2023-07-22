@@ -7,6 +7,7 @@ import Login from '@/views/Login/Login'
 import Sign from '@/views/Login/Sign.vue'
 import Home from '@/views/Home/Home.vue'
 import AritcleList from '@/components/Home/AritcleList.vue'
+import Edit from '@/views/Edit/Edit.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -21,7 +22,8 @@ const routes = [
     children: [
       { path: '/home/:lang', props: true, component: AritcleList }
     ]
-  }
+  },
+  { path: '/edit', component: Edit }
 ]
 
 const router = new VueRouter({

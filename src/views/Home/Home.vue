@@ -46,10 +46,10 @@
                 <router-link to="/">关于</router-link>
               </div></el-col
             ><el-col :span="8"
-              ><div class="info">
+              ><router-link to="/edit" class="info">
                 <span class="el-icon-circle-plus-outline"></span>
-                <router-link to="/">发布</router-link>
-              </div></el-col
+                <span>发布</span>
+              </router-link></el-col
             >
           </el-row></el-col
         >

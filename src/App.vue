@@ -7,7 +7,16 @@
 <script>
 export default {
   name: 'App',
-  components: {}
+  components: {},
+  created () {
+    window.onerror = function (message, source, line, column, error) {
+      console.log(message)
+      console.log(source)
+      console.log(line)
+      console.log(column)
+      console.log(error)
+    }
+  }
 }
 </script>
 
@@ -18,7 +27,7 @@ export default {
 
 }
 div{
-  font-family: "阿里妈妈东方大楷 Regular";
+
 }
 div,
 dl,
@@ -50,7 +59,7 @@ input {
   vertical-align: middle;
 }
 body {
-  font-family: Tahoma, Arial, Helvetica;
+  font-family: "阿里妈妈东方大楷 Regular";
   // text-align: center;
   background: #fff;
   color: #000;
