@@ -23,7 +23,6 @@ export default {
   methods: {
     // v-md-editor 文件上传
     handleUploadImage (event, insertImage, files) {
-      // console.log(files);
       // 上传
       for (let i = 0; i < files.length; i++) {
         this.crud.upload(files[i], 'image/vMdEditor/').then((res) => {
@@ -42,7 +41,6 @@ export default {
     editorValue: function (newNum, oldNum) {
       // 修改调用者传入的值
       this.$emit('update:content', newNum)
-      console.log('')
     }
   }
 }

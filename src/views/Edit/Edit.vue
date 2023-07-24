@@ -7,7 +7,7 @@
         <span>返回</span>
       </div>
       <input type="text" placeholder="请输入文章标题" />
-      <button>发布文章</button>
+      <button @click="uoLoadArt">发布文章</button>
     </div>
     <MdEditor :content.sync="obj.content"></MdEditor>
   </div>
@@ -25,11 +25,8 @@ export default {
     }
   },
   methods: {
-    watch: {
-      change (text, html) {
-        console.log(text)
-      }
-
+    uoLoadArt () {
+      console.log(this.obj.content)
     }
   }
 }
