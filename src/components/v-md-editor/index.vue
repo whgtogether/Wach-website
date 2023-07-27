@@ -1,9 +1,10 @@
 <template>
   <div>
     <v-md-editor
+      height="800px"
       v-model="editorValue"
       :disabled-menus="[]"
-      @upload-image="handleUploadImage"
+      @upload-image="handleUplsoadImage"
     ></v-md-editor>
   </div>
 </template>

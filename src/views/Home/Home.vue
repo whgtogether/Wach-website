@@ -10,7 +10,7 @@
               <div class="info">
                 <div class="home" @click="backTop">
                   <span class="el-icon-house"></span>
-                  <router-link to="/home">首页</router-link>
+                   <router-link to="/home">首页</router-link>
                 </div>
               </div></el-col
             >
