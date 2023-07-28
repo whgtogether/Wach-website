@@ -2,7 +2,5 @@
 import request from '@/utils/request'
 
 export const getArt = function (params) {
-  return request.get('/getart', {
-    params
-  })
+  return request.get('/getart', params)
 }

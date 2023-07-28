@@ -9,13 +9,6 @@ export default {
   name: 'App',
   components: {},
   created () {
-    window.onerror = function (message, source, line, column, error) {
-      console.log(message)
-      console.log(source)
-      console.log(line)
-      console.log(column)
-      console.log(error)
-    }
   }
 }
 </script>

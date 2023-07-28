@@ -4,7 +4,6 @@
       height="800px"
       v-model="editorValue"
       :disabled-menus="[]"
-      @upload-image="handleUplsoadImage"
     ></v-md-editor>
   </div>
 </template>
@@ -22,21 +21,6 @@ export default {
     content: String
   },
   methods: {
-    // v-md-editor 文件上传
-    handleUploadImage (event, insertImage, files) {
-      // 上传
-      for (let i = 0; i < files.length; i++) {
-        this.crud.upload(files[i], 'image/vMdEditor/').then((res) => {
-          // 获取返回数据
-          const data = res.data.data
-          // 添加图片到内容
-          insertImage({
-            url: data.url,
-            desc: data.name
-          })
-        })
-      }
-    }
   },
   watch: {
     editorValue: function (newNum, oldNum) {
