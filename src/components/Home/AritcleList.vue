@@ -75,6 +75,7 @@ export default {
   },
   async created () {
     console.log('创建阶段')
+    console.log(this.params)
     const { data: res } = await getArt(this.params)
     this.artlist = res.date
     const { data: res1 } = await getArt(this.alyParams)
